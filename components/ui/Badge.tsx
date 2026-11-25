@@ -1,22 +1,22 @@
-import React from "react";
+import type { ReactNode } from "react";
 
 interface BadgeProps {
-  children: React.ReactNode;
+  children: ReactNode;
   variant?: "gold" | "red" | "teal" | "audio";
   className?: string;
 }
 
-export function Badge({ children, variant = "red", className = "" }: BadgeProps) {
-  const variantStyles = {
-    red: "bg-[#d32f2f] text-white font-bold",
-    gold: "bg-[#c5a059] text-black font-semibold",
-    teal: "bg-[#ffebee] text-[#c62828] border border-[#ffcdd2] font-semibold",
-    audio: "bg-[#0288d1] text-white font-medium"
-  };
+const variantStyles = {
+  red: "border-accent-line bg-accent-soft text-accent",
+  gold: "border-gold/50 bg-gold/15 text-gold-deep",
+  teal: "border-teal-200 bg-teal-50 text-teal-800",
+  audio: "border-line bg-surface-muted text-muted",
+};
 
+export function Badge({ children, variant = "red", className = "" }: BadgeProps) {
   return (
     <span
-      className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs tracking-wide shadow-sm ${variantStyles[variant]} ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold ${variantStyles[variant]} ${className}`}
     >
       {children}
     </span>

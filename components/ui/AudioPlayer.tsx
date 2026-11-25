@@ -1,106 +1,112 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
-import { Volume2, Play, Pause } from "lucide-react";
+import { useCallback, useRef, useState, type ChangeEvent } from "react";
+import { Pause, Play, Volume2 } from "lucide-react";
 
 interface AudioPlayerProps {
   audioSrc?: string;
   durationText?: string;
 }
 
-export function AudioPlayer({ audioSrc = "/audio/sample.mp3", durationText = "13:55" }: AudioPlayerProps) {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+function formatTime(seconds: number) {
+  const minutes = Math.floor(seconds / 60);
+  const remainder = Math.floor(seconds % 60);
+  return `${minutes}:${String(remainder).padStart(2, "0")}`;
+}
+
+function getAudioDuration(audio: HTMLAudioElement) {
+  return Number.isFinite(audio.duration) ? audio.duration : 0;
+}
+
+export function AudioPlayer({
+  audioSrc = "/audio/sample.mp3",
+  durationText = "13:55",
+}: AudioPlayerProps) {
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
+  const attachAudio = useCallback((audio: HTMLAudioElement | null) => {
+    audioRef.current = audio;
 
-    const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
-    const handleLoadedMetadata = () => setDuration(audio.duration || 0);
-    const handleEnded = () => setIsPlaying(false);
-
-    audio.addEventListener("timeupdate", handleTimeUpdate);
-    audio.addEventListener("loadedmetadata", handleLoadedMetadata);
-    audio.addEventListener("ended", handleEnded);
-
-    return () => {
-      audio.removeEventListener("timeupdate", handleTimeUpdate);
-      audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
-      audio.removeEventListener("ended", handleEnded);
-    };
+    if (audio) setDuration(getAudioDuration(audio));
   }, []);
 
   const togglePlay = () => {
-    if (!audioRef.current) return;
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (audio.paused) {
+      void audio.play().catch(() => {});
     } else {
-      audioRef.current.play().catch(() => {});
-      setIsPlaying(true);
+      audio.pause();
     }
   };
 
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const time = parseFloat(e.target.value);
-    setCurrentTime(time);
+  const handleSeek = (event: ChangeEvent<HTMLInputElement>) => {
+    const time = Number(event.currentTarget.value);
+
     if (audioRef.current) {
       audioRef.current.currentTime = time;
+      setCurrentTime(time);
     }
-  };
-
-  const formatTime = (seconds: number) => {
-    if (isNaN(seconds)) return "0:00";
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
   };
 
   return (
-    <div className="w-full bg-[#1b2354] border border-[#2b3979] rounded-xl p-3.5 sm:p-5 shadow-lg text-white mb-6">
-      <div className="flex items-center gap-2.5 sm:gap-3 mb-3 sm:mb-4">
-        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#2a3775] flex items-center justify-center text-[#e5c158] flex-shrink-0">
-          <Volume2 className="w-4 h-4 sm:w-5 sm:h-5" />
-        </div>
-        <div className="min-w-0">
-          <h3 className="font-bold text-[#e5c158] text-xs sm:text-sm uppercase tracking-wide truncate">
-            Âm thanh thuyết minh
-          </h3>
-          <p className="text-[11px] sm:text-xs text-blue-200 truncate">Nhấn phát để nghe bài thuyết minh tự động</p>
-        </div>
+    <section className="rounded-xl border border-accent-line bg-accent-soft p-3.5 sm:p-5">
+      <div className="mb-3 flex items-center gap-2.5 sm:gap-3">
+        <span className="grid size-9 shrink-0 place-items-center rounded-full bg-surface text-accent">
+          <Volume2 aria-hidden="true" className="size-5" />
+        </span>
+        <h2 className="text-sm font-bold text-accent sm:text-base">Âm thanh thuyết minh</h2>
       </div>
 
-      <audio ref={audioRef} src={audioSrc} preload="metadata" />
+      <audio
+        ref={attachAudio}
+        src={audioSrc}
+        preload="metadata"
+        onDurationChange={(event) => setDuration(getAudioDuration(event.currentTarget))}
+        onTimeUpdate={(event) => setCurrentTime(event.currentTarget.currentTime)}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+        onEnded={() => setIsPlaying(false)}
+      />
 
-      <div className="bg-[#f1f3f4] text-gray-800 rounded-full px-3 sm:px-4 py-2 flex items-center gap-2 sm:gap-3 shadow-inner">
+      <div className="flex items-center gap-2 rounded-xl border border-accent-line bg-surface px-2.5 py-2 sm:gap-3 sm:px-3">
         <button
+          type="button"
           onClick={togglePlay}
-          className="w-8 h-8 rounded-full bg-blue-600 hover:bg-blue-700 active:scale-95 text-white flex items-center justify-center transition flex-shrink-0 shadow-sm"
+          className="grid size-11 shrink-0 cursor-pointer place-items-center rounded-full bg-accent text-white transition-colors duration-200 hover:bg-accent-hover"
           aria-label={isPlaying ? "Tạm dừng" : "Phát"}
         >
-          {isPlaying ? <Pause className="w-4 h-4 fill-white" /> : <Play className="w-4 h-4 fill-white ml-0.5" />}
+          {isPlaying ? (
+            <Pause aria-hidden="true" className="size-4 fill-current" />
+          ) : (
+            <Play aria-hidden="true" className="ml-0.5 size-4 fill-current" />
+          )}
         </button>
 
-        <span className="text-[11px] sm:text-xs font-mono font-medium text-gray-600 flex-shrink-0">
+        <span className="shrink-0 text-xs font-medium text-muted tabular-nums">
           {formatTime(currentTime)}
         </span>
 
         <input
           type="range"
-          min="0"
-          max={duration || 100}
+          min={0}
+          max={duration}
+          step="any"
           value={currentTime}
+          disabled={!duration}
           onChange={handleSeek}
-          className="flex-1 min-w-[60px] h-1.5 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-blue-600"
+          aria-label="Vị trí phát âm thanh"
+          className="h-7 min-w-0 flex-1 cursor-pointer accent-accent disabled:cursor-default"
         />
 
-        <span className="text-[11px] sm:text-xs font-mono font-medium text-gray-500 flex-shrink-0">
+        <span className="shrink-0 text-xs font-medium text-muted tabular-nums">
           {duration ? formatTime(duration) : durationText}
         </span>
       </div>
-    </div>
+    </section>
   );
 }

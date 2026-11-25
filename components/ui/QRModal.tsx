@@ -1,71 +1,69 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
 import { QRCodeSVG } from "qrcode.react";
-import { X, QrCode, Copy, Check } from "lucide-react";
+import { Check, Copy, QrCode } from "lucide-react";
+import { Modal } from "@/components/ui/Modal";
+
+export type LinkCopyStatus = "idle" | "copied" | "error";
 
 interface QRModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+  url: string;
   title: string;
+  onClose: () => void;
+  copyStatus: LinkCopyStatus;
+  onCopy: () => void;
 }
 
-export function QRModal({ isOpen, onClose, title }: QRModalProps) {
-  const [currentUrl, setCurrentUrl] = useState("");
-  const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setCurrentUrl(window.location.href);
-    }
-  }, [isOpen]);
-
-  if (!isOpen) return null;
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(currentUrl);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
+export function QRModal({ url, title, onClose, copyStatus, onCopy }: QRModalProps) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-fade-in">
-      <div className="bg-[#121626] border border-amber-600/40 text-white rounded-2xl max-w-sm w-full p-6 shadow-2xl relative flex flex-col items-center text-center">
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 text-gray-400 hover:text-white p-1 rounded-full bg-white/5 hover:bg-white/10 transition"
-        >
-          <X className="w-5 h-5" />
-        </button>
-
-        <div className="w-12 h-12 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-[#e5c158] mb-3">
-          <QrCode className="w-6 h-6" />
+    <Modal label="Mã QR bài thuyết minh" onClose={onClose} className="max-w-sm">
+      <div className="flex flex-col items-center px-5 py-6 text-center sm:px-7">
+        <div className="mb-3 grid size-12 place-items-center rounded-full bg-accent-soft text-accent">
+          <QrCode aria-hidden="true" className="size-6" />
         </div>
 
-        <h3 className="font-bold text-lg text-[#e5c158] mb-1">MÃ QR BÀI THUYẾT MINH</h3>
-        <p className="text-xs text-gray-300 mb-4 line-clamp-2 px-2">{title}</p>
+        <h2 className="font-display text-2xl font-bold">Mã QR bài thuyết minh</h2>
+        <p className="mt-2 text-xs leading-relaxed text-muted">{title}</p>
 
-        <div className="bg-white p-4 rounded-xl shadow-inner mb-4 border-4 border-amber-500/30">
-          <QRCodeSVG value={currentUrl || "https://localhost:3000"} size={180} level="H" />
+        <div className="my-4 rounded-xl border border-line bg-surface p-4 shadow-xs">
+          <QRCodeSVG
+            value={url}
+            title="Mã QR dẫn đến bài thuyết minh này"
+            size={180}
+            level="H"
+            className="block max-w-full"
+          />
         </div>
 
-        <p className="text-xs text-gray-400 mb-3">Quét mã QR bằng điện thoại để xem trực tiếp</p>
+        <p className="mb-4 text-sm text-muted">Quét mã để mở bài thuyết minh trên điện thoại.</p>
+
+        {copyStatus === "error" && (
+          <label className="mb-4 w-full text-left text-sm font-medium">
+            Sao chép đường dẫn bên dưới
+            <input
+              value={url}
+              readOnly
+              onFocus={(event) => event.currentTarget.select()}
+              className="mt-1 w-full rounded-lg border border-control bg-surface px-3 py-2 text-sm"
+            />
+          </label>
+        )}
 
         <button
-          onClick={handleCopy}
-          className="w-full flex items-center justify-center gap-2 py-2 px-4 bg-amber-600/20 hover:bg-amber-600/30 border border-amber-500/40 rounded-lg text-sm text-amber-300 font-medium transition"
+          type="button"
+          onClick={onCopy}
+          className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-accent-hover"
         >
-          {copied ? (
-            <>
-              <Check className="w-4 h-4 text-green-400" /> Đã sao chép liên kết
-            </>
+          {copyStatus === "copied" ? (
+            <><Check aria-hidden="true" className="size-4" /> Đã sao chép liên kết</>
           ) : (
-            <>
-              <Copy className="w-4 h-4" /> Sao chép liên kết
-            </>
+            <><Copy aria-hidden="true" className="size-4" /> Sao chép liên kết</>
           )}
         </button>
+        <span className="sr-only" role="status">
+          {copyStatus === "copied" && "Đã sao chép liên kết"}
+        </span>
       </div>
-    </div>
+    </Modal>
   );
 }

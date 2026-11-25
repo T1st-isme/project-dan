@@ -1,18 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import { ExternalLink } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AudioPlayer } from "@/components/ui/AudioPlayer";
 import { LightboxImage } from "@/components/ui/LightboxImage";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { PanelNavigation } from "@/components/panels/PanelNavigation";
-import { FontSizeControl } from "@/components/ui/FontSizeControl";
-import { QRModal } from "@/components/ui/QRModal";
 import { Badge } from "@/components/ui/Badge";
-import { Panel } from "@/types";
+import type { Panel } from "@/types";
 import { useFontSize } from "@/hooks/useFontSize";
-import { QrCode, Share2, Check } from "lucide-react";
 
 interface PanelDetailClientProps {
   panel: Panel;
@@ -22,19 +19,9 @@ interface PanelDetailClientProps {
 
 export function PanelDetailClient({ panel, prev, next }: PanelDetailClientProps) {
   const { fontSize, changeFontSize, getFontSizeClass } = useFontSize();
-  const [isQRModalOpen, setIsQRModalOpen] = useState(false);
-  const [copiedShare, setCopiedShare] = useState(false);
-
-  const handleShare = () => {
-    if (typeof window !== "undefined") {
-      navigator.clipboard.writeText(window.location.href);
-      setCopiedShare(true);
-      setTimeout(() => setCopiedShare(false), 2000);
-    }
-  };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0b0f19]">
+    <div className="flex min-h-screen flex-col">
       <Header
         variant="detail"
         fontSize={fontSize}
@@ -42,97 +29,87 @@ export function PanelDetailClient({ panel, prev, next }: PanelDetailClientProps)
         panelTitle={panel.title}
       />
 
-      {/* Mobile Sticky Reading Utility Bar (Visible on mobile < sm) */}
-      <div className="sm:hidden sticky top-[57px] z-30 bg-[#121629] border-b border-[#232c4d] px-3 py-2 flex items-center justify-between gap-2 shadow-md">
-        <div className="flex items-center gap-1.5">
-          <span className="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Cỡ chữ:</span>
-          <FontSizeControl currentSize={fontSize} onSizeChange={changeFontSize} />
-        </div>
-
-        <div className="flex items-center gap-1.5">
-          <button
-            onClick={() => setIsQRModalOpen(true)}
-            className="flex items-center gap-1 px-2 py-1 bg-[#1a233b] border border-amber-400/40 rounded-md text-[11px] font-bold text-[#f3d078]"
-          >
-            <QrCode className="w-3.5 h-3.5 text-amber-300" />
-            <span>MÃ QR</span>
-          </button>
-
-          <button
-            onClick={handleShare}
-            className="p-1 bg-[#1a233b] border border-gray-600 rounded-md text-gray-200"
-            title={copiedShare ? "Đã sao chép!" : "Chia sẻ"}
-          >
-            {copiedShare ? (
-              <Check className="w-3.5 h-3.5 text-green-400" />
-            ) : (
-              <Share2 className="w-3.5 h-3.5 text-amber-200" />
-            )}
-          </button>
-        </div>
-      </div>
-
-      <main className="flex-1 w-full max-w-5xl mx-auto px-4 py-6">
-        {/* Top Navigation */}
+      <main id="noi-dung" tabIndex={-1} className="mx-auto w-full max-w-5xl flex-1 px-4 pt-5 pb-10 outline-none sm:px-6 sm:pt-7">
         <PanelNavigation prev={prev} next={next} />
 
-        {/* Main Content Card */}
-        <div className="bg-white text-gray-900 rounded-xl sm:rounded-2xl shadow-2xl p-4 sm:p-6 md:p-10 border border-gray-200">
-          {/* Badge */}
-          <div className="mb-3">
-            <Badge variant="teal" className="text-xs uppercase tracking-wider px-3 py-1">
-              {panel.id} - {panel.roomLabel}
-            </Badge>
+        <article className="my-5 overflow-hidden rounded-2xl border border-line bg-surface shadow-panel sm:my-6">
+          <div aria-hidden="true" className="h-1.5 bg-accent" />
+          <div aria-hidden="true" className="h-1 bg-gold" />
+          <div className="p-4 sm:p-8 lg:p-10">
+          <div className="mb-6 border-b border-line pb-5 sm:mb-7 sm:pb-6">
+            <p className="mb-3 text-sm font-semibold text-accent">Công tác Đảng · Công tác chính trị</p>
+            <Badge>{panel.id} · {panel.roomLabel}</Badge>
+            <h1 className="mt-3 text-xl leading-snug font-bold text-balance text-ink sm:text-3xl sm:leading-snug">
+              {panel.title}
+            </h1>
           </div>
 
-          {/* Title */}
-          <h1 className="text-xl md:text-3xl font-extrabold text-gray-900 mb-6 uppercase tracking-tight leading-snug border-b pb-4 border-gray-200">
-            {panel.title}
-          </h1>
-
-          {/* Audio Player */}
           {panel.audioSrc && (
             <AudioPlayer
+              key={panel.audioSrc}
               audioSrc={panel.audioSrc}
               durationText={panel.audioDuration}
             />
           )}
 
-          {/* Image Section */}
-          <div className="mt-8 mb-6">
-            <div className="flex items-center justify-between mb-3 text-xs md:text-sm font-bold">
-              <span className="text-gray-700 uppercase tracking-wide">HÌNH ẢNH MẢNG ẢNH</span>
-              <span className="text-blue-600 font-normal hover:underline cursor-pointer">
-                (CLICK VÀO ẢNH ĐỂ PHÓNG TO)
-              </span>
-            </div>
-
+          <section className="mt-7 sm:mt-9">
+            <h2 className="mb-3 text-base font-bold sm:text-lg">Ảnh trưng bày</h2>
             <LightboxImage src={panel.imageSrc} alt={panel.title} />
-          </div>
+          </section>
 
-          {/* Text Content Thuyết Minh */}
-          <div className="mt-8 pt-6 border-t border-gray-200">
-            <h2 className="text-base md:text-lg font-bold text-gray-800 uppercase mb-4 tracking-wide">
+          <section className="mt-7 border-t border-line pt-6 sm:mt-9 sm:pt-8">
+            <h2 className="mb-4 font-display text-2xl font-bold text-accent sm:text-3xl">
               Nội dung bài thuyết minh
             </h2>
-
-            <div className={`text-gray-800 space-y-4 font-normal whitespace-pre-line ${getFontSizeClass()}`}>
-              {panel.content}
-            </div>
+            {panel.segments ? (
+              <div className={`text-ink ${getFontSizeClass()}`}>
+                {panel.segments.map((segment, index) =>
+                  segment.kind === "text" ? (
+                    <p key={index} className="mb-5 max-w-[68ch] whitespace-pre-line">
+                      {segment.text}
+                    </p>
+                  ) : segment.kind === "link" ? (
+                    <a
+                      key={segment.href}
+                      href={segment.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="my-2 flex max-w-[68ch] items-center gap-3 rounded-xl border-2 border-accent bg-accent px-4 py-4 text-white shadow-panel transition-colors duration-200 hover:bg-accent-hover sm:px-5"
+                    >
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-sm font-semibold text-white/90">{segment.label}</span>
+                        <span className="mt-1 block break-all text-lg font-bold underline decoration-2 underline-offset-4 sm:text-xl">
+                          {segment.href}
+                        </span>
+                      </span>
+                      <ExternalLink aria-hidden="true" className="size-6 shrink-0" />
+                    </a>
+                  ) : (
+                    <figure key={segment.src} className="my-6">
+                      <LightboxImage
+                        src={segment.src}
+                        alt={segment.alt}
+                        width={segment.width}
+                        height={segment.height}
+                      />
+                      <figcaption className="mt-2 text-sm font-semibold leading-relaxed text-muted">
+                        {segment.alt}
+                      </figcaption>
+                    </figure>
+                  )
+                )}
+              </div>
+            ) : (
+              <div className={`max-w-[68ch] whitespace-pre-line text-ink ${getFontSizeClass()}`}>
+                {panel.content}
+              </div>
+            )}
+          </section>
           </div>
-        </div>
+        </article>
 
-        {/* Bottom Navigation */}
-        <div className="mt-6">
-          <PanelNavigation prev={prev} next={next} />
-        </div>
+        <PanelNavigation prev={prev} next={next} />
       </main>
-
-      <QRModal
-        isOpen={isQRModalOpen}
-        onClose={() => setIsQRModalOpen(false)}
-        title={panel.title}
-      />
 
       <ScrollToTop />
       <Footer />

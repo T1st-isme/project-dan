@@ -1,74 +1,75 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { X, ZoomIn } from "lucide-react";
+import { ZoomIn } from "lucide-react";
+import { Modal } from "@/components/ui/Modal";
 
 interface LightboxImageProps {
   src: string;
   alt: string;
+  thumbnail?: boolean;
+  width?: number;
+  height?: number;
 }
 
-export function LightboxImage({ src, alt }: LightboxImageProps) {
+export function LightboxImage({
+  src,
+  alt,
+  thumbnail = false,
+  width = 1280,
+  height = 850,
+}: LightboxImageProps) {
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsOpen(false);
-    };
-    if (isOpen) {
-      window.addEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "hidden";
-    }
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "auto";
-    };
-  }, [isOpen]);
+  const previewLabel = "Phóng to ảnh – " + alt;
+  const imageSizes = thumbnail
+    ? "(min-width: 1280px) 390px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+    : "(min-width: 1024px) 912px, 100vw";
 
   return (
     <>
-      <div
+      <button
+        type="button"
+        aria-label={previewLabel}
+        aria-haspopup="dialog"
         onClick={() => setIsOpen(true)}
-        className="relative group cursor-zoom-in rounded-lg overflow-hidden border border-gray-300 shadow-md bg-white transition hover:shadow-xl"
+        className={`group relative block w-full cursor-zoom-in overflow-hidden bg-surface-muted focus-visible:outline-offset-[-4px] ${
+          thumbnail ? "aspect-[3/2] border-b border-line" : "rounded-xl border border-line"
+        }`}
       >
         <Image
           src={src}
           alt={alt}
-          width={1200}
-          height={800}
-          className="w-full h-auto object-cover transition duration-300 group-hover:scale-[1.01]"
+          fill={thumbnail}
+          width={thumbnail ? undefined : width}
+          height={thumbnail ? undefined : height}
+          sizes={imageSizes}
+          className={`h-auto w-full motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.025] ${
+            thumbnail ? "object-cover" : "object-contain"
+          }`}
         />
-        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-medium text-sm gap-2">
-          <ZoomIn className="w-5 h-5" /> Click để phóng to
-        </div>
-      </div>
+        <span className="absolute right-3 bottom-3 grid size-10 place-items-center rounded-full border border-line bg-surface text-accent shadow-sm transition-colors group-hover:bg-accent-soft">
+          <ZoomIn aria-hidden="true" className="size-5" />
+        </span>
+      </button>
 
       {isOpen && (
-        <div
-          onClick={() => setIsOpen(false)}
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 cursor-zoom-out animate-fade-in"
-        >
-          <button
-            onClick={() => setIsOpen(false)}
-            className="absolute top-4 right-4 text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition"
-            aria-label="Đóng"
-          >
-            <X className="w-6 h-6" />
-          </button>
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative max-w-6xl max-h-[90vh] w-full h-full flex items-center justify-center"
-          >
+        <Modal label={previewLabel} onClose={() => setIsOpen(false)} className="max-w-6xl">
+          <figure>
             <Image
               src={src}
               alt={alt}
-              fill
-              className="object-contain"
-              priority
+              width={width}
+              height={height}
+              sizes="(min-width: 1184px) 1152px, 100vw"
+              loading="eager"
+              className="max-h-[calc(100dvh-7rem)] w-full bg-surface-muted object-contain"
             />
-          </div>
-        </div>
+            <figcaption className="border-t border-line px-4 py-3 text-center text-sm font-semibold leading-relaxed sm:px-8">
+              {alt}
+            </figcaption>
+          </figure>
+        </Modal>
       )}
     </>
   );

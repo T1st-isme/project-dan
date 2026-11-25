@@ -587,6 +587,92 @@ Vì vậy, trước những vấn đề phức tạp trên không gian mạng, m
     audioDuration: "20:02",
     badge: "Âm thanh",
     roomLabel: "PHÒNG HỒ CHÍ MINH"
+  },
+  {
+    id: "MA-07",
+    slug: "ma-07",
+    title: "MẢNG ẢNH 7: HÀNH TRANG SỐ - CÔNG CỤ HỌC TẬP CÔNG TÁC ĐẢNG, CÔNG TÁC CHÍNH TRỊ",
+    shortTitle: "MẢNG ẢNH 7: HÀNH TRANG SỐ",
+    description: "Kính thưa các đồng chí! Đối với người quân nhân cách mạng, hành trang không chỉ là vũ khí, trang bị và kỷ luật trên thao trường. Hành trang còn là nhận thức chính trị, là tri thức, là bản lĩnh tư tưởng...",
+    content: `Kính thưa các đồng chí!
+
+Đối với người quân nhân cách mạng, hành trang không chỉ là vũ khí, trang bị và kỷ luật trên thao trường. Hành trang còn là nhận thức chính trị, là tri thức, là bản lĩnh tư tưởng để mỗi cán bộ, chiến sĩ giữ vững trận địa, hoàn thành nhiệm vụ trong mọi tình huống. Hôm nay, tôi xin giới thiệu đến toàn thể các đồng chí Hành trang số của Lữ đoàn Phòng không 71, công cụ học tập, tra cứu phục vụ công tác Đảng, công tác chính trị.
+
+Hành trang số được xây dựng với phương châm “Tri thức, kỷ luật, sáng tạo”, trên nền truyền thống “Trung thành, dũng cảm, sáng tạo, vì nhân dân phục vụ”. Đây không phải là một trang tin giải trí. Đây là thư viện học tập của đơn vị: nơi cán bộ, chiến sĩ đọc tài liệu, nghe thời sự, học nghị quyết, ôn bài hát truyền thống, tự kiểm tra kiến thức và lấy mẫu biểu phục vụ công tác tuyên huấn. Mỗi nội dung đều gắn với nhiệm vụ xây dựng đơn vị vững mạnh về chính trị, làm cơ sở nâng cao chất lượng tổng hợp và sức mạnh chiến đấu.
+
+Thưa các đồng chí!
+Thư viện được bố trí thành 8 chuyên mục, mạch lạc như các mảng của một phòng truyền thống. Đi từ chế độ, chính sách đến nghị quyết, thời sự, âm nhạc, kiểm tra, bài giảng, hỏi đáp và mẫu biểu. Cán bộ làm công tác chính trị có thể tra cứu nhanh; chiến sĩ có thể học theo đúng đối tượng của mình.
+
+Cụm thứ nhất là Cẩm nang người lính. Cẩm nang có hai mục. Mục I là chế độ, chính sách, nơi tập trung những văn bản về quyền lợi của sĩ quan, quân nhân chuyên nghiệp, hạ sĩ quan và binh sĩ. Trong thư viện hiện có Nghị định số 27/2016/NĐ-CP về một số chế độ, chính sách đối với hạ sĩ quan, binh sĩ phục vụ tại ngũ, xuất ngũ và thân nhân; Nghị định số 21/2009/NĐ-CP hướng dẫn chế độ, chính sách đối với sĩ quan; Luật số 52/2024/QH15 sửa đổi, bổ sung một số điều của Luật Sĩ quan Quân đội nhân dân Việt Nam; và Nghị định số 151/2016/NĐ-CP về chế độ, chính sách của Luật Quân nhân chuyên nghiệp, công nhân và viên chức quốc phòng. Mục II là 100 tình huống tư tưởng, giúp cán bộ có kinh nghiệm và phương pháp xử lý những tình huống thường gặp trong quản lý, giáo dục bộ đội. Nắm chắc chính sách là để chăm lo đúng, công bằng, kịp thời. Nắm chắc tình huống tư tưởng là để nói đúng, làm đúng, giữ vững đoàn kết nội bộ.
+
+Cụm thứ hai là Học tập nghị quyết. Hiện thư viện có ba chuyên đề. Một là Nghị quyết số 25-NQ/TW ngày 22/8/2026 của Bộ Chính trị về Chiến lược công tác tư tưởng trong bối cảnh mới. Hai là Nghị quyết số 26-NQ/TW cùng ngày, về phát triển du lịch Việt Nam trở thành ngành kinh tế mũi nhọn. Ba là Nghị quyết số 23-NQ/TW ngày 02/8/2026 về công tác người Việt Nam ở nước ngoài. Học nghị quyết không phải để đọc cho xong văn bản. Học là để nắm nội dung cốt lõi, liên hệ với nhiệm vụ của Lữ đoàn, và biến chủ trương của Đảng thành việc làm hằng ngày trên trận địa phòng không.
+
+Cụm thứ ba là Đọc báo, nghe tin. Chuyên mục có báo chí hằng ngày và truyền thanh nội bộ. Báo chí chia theo tin thế giới, tin trong nước, tin lực lượng vũ trang và tin đơn vị. Người quân nhân phải biết tình hình, nhưng biết để tỉnh táo, không để tin đồn và thông tin xuyên tạc lấn át nguồn chính thống. Đọc báo, nghe tin trong Hành trang số chính là cách giữ vững trận địa tư tưởng ngay từ mỗi buổi sinh hoạt.
+
+Cụm thứ tư là Kho tàng âm nhạc. Mười sáu bài hát đang được lưu giữ, gồm bài hát quy định trong Quân đội nhân dân Việt Nam, bài hát truyền thống và ca khúc cách mạng. Có Tiến quân ca, Quốc tế ca, Hát mãi khúc quân hành, Ca ngợi Hồ Chủ tịch, Chào mừng Đảng Cộng sản Việt Nam, Vì nhân dân quên mình, Giải phóng Điện Biên, Tiến bước dưới quân kỳ, Bác đang cùng chúng cháu hành quân, Thanh niên làm theo lời Bác, Như có Bác Hồ trong ngày vui đại thắng, và bài hát Quân đoàn 34 “Tiếp bước khúc quân hành”. Âm nhạc ở đây không chỉ để hát cho đều. Mỗi bài hát là một lời nhắc về lý tưởng, về đơn vị và về trách nhiệm của lớp trẻ đang đứng trong đội hình Quân đoàn 34, Lữ đoàn 71 anh hùng.
+
+Cụm thứ năm là Kiểm tra trắc nghiệm, với ngân hàng 51 câu hỏi phục vụ thi và tìm hiểu kiến thức pháp luật. Học mà không kiểm tra thì dễ học chiếu lệ. Làm bài là để biết mình đã nắm chắc đến đâu, chỗ nào còn hổng, để bổ sung trước khi bước vào sinh hoạt, hội thi và thực hiện nhiệm vụ.
+
+Cụm thứ sáu là Giáo dục chính trị, chia theo đúng đối tượng. Chương trình sĩ quan, quân nhân chuyên nghiệp hiện có chuyên đề “Đẩy mạnh học tập và làm theo tư tưởng Hồ Chí Minh về tình thương yêu đồng chí, đồng đội trong Quân đội hiện nay”. Chương trình hạ sĩ quan, binh sĩ có bốn bài. Bài 1: Tăng cường quốc phòng, an ninh, bảo vệ vững chắc Tổ quốc Việt Nam xã hội chủ nghĩa trong tình hình mới. Bài 2: Bảo vệ chủ quyền biển, đảo và biên giới quốc gia. Bài 3: Giữ vững và tăng cường đoàn kết nội bộ, đoàn kết quân dân, đoàn kết quốc tế. Bài 4: Xây dựng và phát huy giá trị văn hóa, sức mạnh con người Việt Nam và giá trị văn hóa “Bộ đội Cụ Hồ”. Bốn bài ấy nối với nhau thành một mạch: có Tổ quốc để bảo vệ, có chủ quyền để giữ, có đoàn kết để tạo sức mạnh, và có phẩm chất Bộ đội Cụ Hồ để xứng đáng với nhân dân.
+
+Cụm thứ bảy là Mỗi ngày một câu hỏi, chín câu hỏi đáp về kiến thức chính trị, quân sự. Học không dồn vào một buổi. Mỗi ngày một câu là cách rèn thói quen nghiền ngẫm, để kiến thức đi vào nếp nghĩ, nếp làm.
+
+Cụm thứ tám là Mẫu biểu các loại, 55 mẫu phục vụ công tác tuyên huấn. Từ kiện toàn tổ cán bộ giảng dạy chính trị, thành lập tổ học tập, xây dựng tủ sách pháp luật, đến kế hoạch thông qua bài giảng và đề cương bài giảng. Mẫu biểu giúp công tác Đảng, công tác chính trị đi vào nền nếp, thống nhất, đúng hướng dẫn, không làm theo cảm tính.
+
+Kính thưa các đồng chí!
+Hành trang số chỉ phát huy tác dụng khi được sử dụng đều, đúng và có trách nhiệm. Qua thư viện này, mỗi cán bộ, chiến sĩ cần nắm vững mấy việc:
+
+Một là, tuyệt đối trung thành với Đảng, với Tổ quốc và nhân dân. Học nghị quyết, học bài giảng, đọc thời sự để nâng cao bản lĩnh chính trị, không dao động trước thông tin sai trái.
+
+Hai là, học đúng đối tượng, học có liên hệ. Sĩ quan, quân nhân chuyên nghiệp nắm chuyên đề của mình. Hạ sĩ quan, binh sĩ nắm chắc bốn bài giáo dục chính trị. Điều đã học phải thấy được trong huấn luyện, sẵn sàng chiến đấu, chấp hành kỷ luật và quan hệ đồng chí, đồng đội.
+
+Ba là, chăm lo con người bằng chế độ, chính sách đúng và bằng tình thương yêu đồng chí, đồng đội. Chính sách phải được tra cứu từ văn bản. Tư tưởng phải được nắm từ cơ sở. Đoàn kết nội bộ không phải khẩu hiệu, mà là việc làm hằng ngày.
+
+Bốn là, giữ nghiêm kỷ luật sử dụng tài liệu. Học để nâng cao nhận thức và hoàn thành nhiệm vụ, không để tài liệu nội bộ bị phát tán, không chia sẻ thông tin chưa được kiểm chứng.
+
+Tự hào truyền thống “Kiên cường, dũng cảm; đoàn kết, hiệp đồng; tự lực, tự cường, đã đánh là thắng”, cán bộ, chiến sĩ Lữ đoàn Phòng không 71 hãy biến Hành trang số thành hành trang thật của mình. Học để biết. Biết để làm. Làm để đơn vị vững mạnh toàn diện, “mẫu mực, tiêu biểu”, quản lý vững vùng trời được giao, xứng đáng với niềm tin của Đảng, Nhà nước, Quân đội và nhân dân.
+
+Kính thưa các đồng chí, tôi xin kết thúc phần giới thiệu.`,
+    imageSrc: "/images/panels/panel-07.jpg",
+    audioSrc: "/audio/audio7.mp3",
+    audioDuration: "09:45",
+    badge: "Âm thanh",
+    segments: [
+      { kind: "text", text: `Kính thưa các đồng chí!
+
+Đối với người quân nhân cách mạng, hành trang không chỉ là vũ khí, trang bị và kỷ luật trên thao trường. Hành trang còn là nhận thức chính trị, là tri thức, là bản lĩnh tư tưởng để mỗi cán bộ, chiến sĩ giữ vững trận địa, hoàn thành nhiệm vụ trong mọi tình huống. Hôm nay, tôi xin giới thiệu đến toàn thể các đồng chí Hành trang số của Lữ đoàn Phòng không 71, công cụ học tập, tra cứu phục vụ công tác Đảng, công tác chính trị.
+
+Hành trang số được xây dựng với phương châm “Tri thức, kỷ luật, sáng tạo”, trên nền truyền thống “Trung thành, dũng cảm, sáng tạo, vì nhân dân phục vụ”. Đây không phải là một trang tin giải trí. Đây là thư viện học tập của đơn vị: nơi cán bộ, chiến sĩ đọc tài liệu, nghe thời sự, học nghị quyết, ôn bài hát truyền thống, tự kiểm tra kiến thức và lấy mẫu biểu phục vụ công tác tuyên huấn.` },
+      { kind: "image", src: "/images/panels/ma-07/web-dang-nhap.png", alt: "Màn hình đăng nhập Hành trang số trên giao diện web", width: 1440, height: 900 },
+      { kind: "text", text: `Thưa các đồng chí!
+Thư viện được bố trí thành 8 chuyên mục, mạch lạc như các mảng của một phòng truyền thống. Đi từ chế độ, chính sách đến nghị quyết, thời sự, âm nhạc, kiểm tra, bài giảng, hỏi đáp và mẫu biểu. Cán bộ làm công tác chính trị có thể tra cứu nhanh; chiến sĩ có thể học theo đúng đối tượng của mình.` },
+      { kind: "image", src: "/images/panels/ma-07/web-trang-chu.png", alt: "Trang chủ thư viện với tám chuyên mục trên màn hình web", width: 1440, height: 900 },
+      { kind: "text", text: `Cụm thứ nhất là Cẩm nang người lính. Cẩm nang có hai mục: Mục I là chế độ, chính sách dành cho sĩ quan, quân nhân chuyên nghiệp, hạ sĩ quan và binh sĩ; Mục II là 100 tình huống tư tưởng, giúp cán bộ có kinh nghiệm và phương pháp xử lý những tình huống thường gặp trong quản lý, giáo dục bộ đội.` },
+      { kind: "image", src: "/images/panels/ma-07/web-cam-nang.png", alt: "Chuyên mục Cẩm nang người lính trên màn hình web", width: 1440, height: 900 },
+      { kind: "text", text: `Trong mục chế độ, chính sách hiện có Nghị định số 27/2016/NĐ-CP về một số chế độ, chính sách đối với hạ sĩ quan, binh sĩ phục vụ tại ngũ, xuất ngũ và thân nhân; Nghị định số 21/2009/NĐ-CP hướng dẫn chế độ, chính sách đối với sĩ quan; Luật số 52/2024/QH15 sửa đổi, bổ sung một số điều của Luật Sĩ quan Quân đội nhân dân Việt Nam; và Nghị định số 151/2016/NĐ-CP về chế độ, chính sách của Luật Quân nhân chuyên nghiệp, công nhân và viên chức quốc phòng. Nắm chắc chính sách là để chăm lo đúng, công bằng, kịp thời. Nắm chắc tình huống tư tưởng là để nói đúng, làm đúng, giữ vững đoàn kết nội bộ.` },
+      { kind: "image", src: "/images/panels/ma-07/web-che-do.png", alt: "Danh sách văn bản chế độ, chính sách trên màn hình web", width: 1440, height: 900 },
+      { kind: "text", text: `Cụm thứ hai là Học tập nghị quyết. Hiện thư viện có ba chuyên đề. Một là Nghị quyết số 25-NQ/TW ngày 22/8/2026 của Bộ Chính trị về Chiến lược công tác tư tưởng trong bối cảnh mới. Hai là Nghị quyết số 26-NQ/TW cùng ngày, về phát triển du lịch Việt Nam trở thành ngành kinh tế mũi nhọn. Ba là Nghị quyết số 23-NQ/TW ngày 02/8/2026 về công tác người Việt Nam ở nước ngoài. Học nghị quyết không phải để đọc cho xong văn bản. Học là để nắm nội dung cốt lõi, liên hệ với nhiệm vụ của Lữ đoàn, và biến chủ trương của Đảng thành việc làm hằng ngày trên trận địa phòng không.` },
+      { kind: "image", src: "/images/panels/ma-07/web-nghi-quyet.png", alt: "Chuyên mục Học tập nghị quyết trên màn hình web", width: 1440, height: 900 },
+      { kind: "text", text: `Cụm thứ ba là Đọc báo, nghe tin. Chuyên mục có báo chí hằng ngày và truyền thanh nội bộ. Báo chí chia theo tin thế giới, tin trong nước, tin lực lượng vũ trang và tin đơn vị. Người quân nhân phải biết tình hình, nhưng biết để tỉnh táo, không để tin đồn và thông tin xuyên tạc lấn át nguồn chính thống.
+
+Cụm thứ tư là Kho tàng âm nhạc. Mười sáu bài hát đang được lưu giữ, gồm bài hát quy định trong Quân đội nhân dân Việt Nam, bài hát truyền thống và ca khúc cách mạng. Có Tiến quân ca, Quốc tế ca, Hát mãi khúc quân hành, Ca ngợi Hồ Chủ tịch, và bài hát Quân đoàn 34 “Tiếp bước khúc quân hành”. Âm nhạc ở đây không chỉ để hát cho đều. Mỗi bài hát là một lời nhắc về lý tưởng, về đơn vị và về trách nhiệm của lớp trẻ đang đứng trong đội hình Quân đoàn 34, Lữ đoàn 71 anh hùng.
+
+Cụm thứ năm là Kiểm tra trắc nghiệm, với ngân hàng 51 câu hỏi phục vụ thi và tìm hiểu kiến thức pháp luật. Học mà không kiểm tra thì dễ học chiếu lệ.` },
+      { kind: "text", text: `Cụm thứ sáu là Giáo dục chính trị, chia theo đúng đối tượng. Chương trình sĩ quan, quân nhân chuyên nghiệp hiện có chuyên đề “Đẩy mạnh học tập và làm theo tư tưởng Hồ Chí Minh về tình thương yêu đồng chí, đồng đội trong Quân đội hiện nay”. Chương trình hạ sĩ quan, binh sĩ có bốn bài. Bài 1: Tăng cường quốc phòng, an ninh, bảo vệ vững chắc Tổ quốc Việt Nam xã hội chủ nghĩa trong tình hình mới. Bài 2: Bảo vệ chủ quyền biển, đảo và biên giới quốc gia. Bài 3: Giữ vững và tăng cường đoàn kết nội bộ, đoàn kết quân dân, đoàn kết quốc tế. Bài 4: Xây dựng và phát huy giá trị văn hóa, sức mạnh con người Việt Nam và giá trị văn hóa “Bộ đội Cụ Hồ”.` },
+      { kind: "image", src: "/images/panels/ma-07/web-giao-duc.png", alt: "Chuyên mục Giáo dục chính trị trên màn hình web", width: 1440, height: 900 },
+      { kind: "text", text: `Cụm thứ bảy là Mỗi ngày một câu hỏi, chín câu hỏi đáp về kiến thức chính trị, quân sự. Học không dồn vào một buổi. Mỗi ngày một câu là cách rèn thói quen nghiền ngẫm, để kiến thức đi vào nếp nghĩ, nếp làm.
+
+Cụm thứ tám là Mẫu biểu các loại, 55 mẫu phục vụ công tác tuyên huấn. Mẫu biểu giúp công tác Đảng, công tác chính trị đi vào nền nếp, thống nhất, đúng hướng dẫn.
+
+Kính thưa các đồng chí!
+Hành trang số chỉ phát huy tác dụng khi được sử dụng đều, đúng và có trách nhiệm. Mỗi cán bộ, chiến sĩ cần tuyệt đối trung thành với Đảng, với Tổ quốc và nhân dân; học đúng đối tượng và liên hệ với nhiệm vụ; chăm lo con người bằng chế độ, chính sách đúng; giữ nghiêm kỷ luật sử dụng tài liệu.
+
+Tự hào truyền thống “Kiên cường, dũng cảm; đoàn kết, hiệp đồng; tự lực, tự cường, đã đánh là thắng”, cán bộ, chiến sĩ Lữ đoàn Phòng không 71 hãy biến Hành trang số thành hành trang thật của mình. Học để biết. Biết để làm. Làm để đơn vị vững mạnh toàn diện, “mẫu mực, tiêu biểu”, quản lý vững vùng trời được giao, xứng đáng với niềm tin của Đảng, Nhà nước, Quân đội và nhân dân.
+
+Kính thưa các đồng chí, tôi xin kết thúc phần giới thiệu.` },
+      { kind: "link", href: "https://hanhtrangsoviet.tech/", label: "Truy cập Hành trang số" },
+    ],
+    roomLabel: "PHÒNG HỒ CHÍ MINH"
   }
 ];
 

@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Check, ChevronLeft, QrCode, Share2 } from "lucide-react";
 import { FontSizeControl } from "@/components/ui/FontSizeControl";
-import { QRModal } from "@/components/ui/QRModal";
-import { FontSizeLevel } from "@/hooks/useFontSize";
-import { QrCode, Share2, ChevronLeft, Check } from "lucide-react";
+import { QRModal, type LinkCopyStatus } from "@/components/ui/QRModal";
+import type { FontSizeLevel } from "@/hooks/useFontSize";
 
 interface HeaderProps {
   variant?: "list" | "detail";
@@ -19,104 +19,128 @@ export function Header({
   variant = "list",
   fontSize = "md",
   onFontSizeChange,
-  panelTitle = ""
+  panelTitle = "",
 }: HeaderProps) {
-  const [isQRModalOpen, setIsQRModalOpen] = useState(false);
-  const [copiedShare, setCopiedShare] = useState(false);
+  const [qrUrl, setQrUrl] = useState("");
+  const [copyStatus, setCopyStatus] = useState<LinkCopyStatus>("idle");
+  const copied = copyStatus === "copied";
 
-  const handleShare = () => {
-    if (typeof window !== "undefined") {
-      navigator.clipboard.writeText(window.location.href);
-      setCopiedShare(true);
-      setTimeout(() => setCopiedShare(false), 2000);
+  useEffect(() => {
+    if (!copied) return;
+
+    const timeout = window.setTimeout(() => setCopyStatus("idle"), 2000);
+    return () => window.clearTimeout(timeout);
+  }, [copied]);
+
+  const openQR = () => {
+    setCopyStatus("idle");
+    setQrUrl(window.location.href);
+  };
+
+  const copyLink = async () => {
+    const url = window.location.href;
+
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopyStatus("copied");
+    } catch {
+      setCopyStatus("error");
+      setQrUrl(url);
     }
   };
 
   return (
-    <header className="w-full bg-gradient-to-b from-[#8f0000] to-[#700000] border-t-2 border-b-2 border-[#c5a059] text-white shadow-xl sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-2.5 sm:px-4 py-2 flex items-center justify-between gap-2">
-        {/* Left: Back Button & Logo + Brand & Room */}
-        <div className="flex items-center gap-1.5 sm:gap-3 min-w-0 flex-1">
-          {variant === "detail" && (
+    <>
+      <header className="sticky top-0 z-40 border-b border-line bg-surface/95 shadow-panel backdrop-blur-sm">
+        <div aria-hidden="true" className="h-1.5 bg-accent" />
+        <div aria-hidden="true" className="h-1 bg-gold" />
+        <div className="mx-auto grid min-h-16 max-w-7xl grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-2 px-3 py-2 sm:min-h-20 sm:px-6 lg:px-8">
+          <Link href="/" aria-label="Trang chủ" className="justify-self-start rounded-full">
+            <Image
+              src="/images/logo-emblem.png"
+              alt=""
+              width={48}
+              height={48}
+              sizes="(min-width: 640px) 48px, 40px"
+              className="size-10 object-contain sm:size-12"
+            />
+          </Link>
+
+          <div className="text-center">
             <Link
               href="/"
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-black/30 hover:bg-black/50 border border-amber-400/40 rounded-lg text-xs font-bold text-[#e5c158] hover:text-amber-200 transition-all shrink-0 group"
-              title="Quay lại danh sách mảng ảnh"
+              className="rounded-sm font-display text-base font-bold leading-tight tracking-tight text-ink transition-colors duration-200 hover:text-accent min-[375px]:text-xl sm:text-3xl"
             >
-              <ChevronLeft className="w-4 h-4 text-[#e5c158] group-hover:-translate-x-0.5 transition-transform" />
-              <span className="text-[11px] sm:text-xs font-bold tracking-wide">DANH SÁCH</span>
+              Phòng Hồ Chí Minh
             </Link>
-          )}
+            <p className="mt-0.5 text-xs font-semibold leading-snug text-balance text-accent">
+              Công tác Đảng · Công tác chính trị
+            </p>
+          </div>
 
-          <Link href="/" className="flex items-center gap-2 sm:gap-3 group min-w-0">
-            <div className="relative w-9 h-9 sm:w-12 sm:h-12 shrink-0 drop-shadow-md">
-              <Image
-                src="/images/logo-emblem.png"
-                alt="Emblem"
-                fill
-                className="object-contain"
-              />
-            </div>
-            <div className="min-w-0">
-              <h1 className="text-xs sm:text-sm md:text-base font-extrabold text-[#f3d078] tracking-wide uppercase leading-tight group-hover:text-white transition truncate">
-                THUYẾT MINH MẢNG ẢNH
-              </h1>
-              <p className="text-[9px] sm:text-[11px] font-bold text-amber-100/90 uppercase tracking-widest truncate mt-0.5">
-                PHÒNG HỒ CHÍ MINH
-              </p>
-            </div>
-          </Link>
+          <div className="justify-self-end text-right sm:border-l sm:border-line sm:pl-4">
+            <p className="text-xs font-bold whitespace-nowrap text-ink">Lữ đoàn 71</p>
+            <p className="mt-0.5 text-xs font-medium whitespace-nowrap text-muted">Tiểu đoàn 16</p>
+          </div>
         </div>
 
-        {/* Dedicated Military Unit Badge Box */}
-        <div className="flex flex-col items-center justify-center bg-[#500000]/80 border border-amber-400/50 rounded-lg px-2 sm:px-3 py-1 shrink-0 shadow-md">
-          <span className="text-[9px] sm:text-xs font-extrabold text-[#f3d078] tracking-widest uppercase leading-tight">
-            LỮ ĐOÀN 71
-          </span>
-          <span className="text-[8px] sm:text-[10px] md:text-[11px] font-bold text-amber-100 uppercase tracking-widest leading-tight mt-0.5">
-            TIỂU ĐOÀN 16
-          </span>
-        </div>
-
-        {/* Right: Desktop Action Tools (detail page sm+) */}
         {variant === "detail" && (
-          <div className="hidden sm:flex items-center gap-2 shrink-0">
-            {onFontSizeChange && (
-              <FontSizeControl
-                currentSize={fontSize}
-                onSizeChange={onFontSizeChange}
-              />
-            )}
+          <div className="border-t border-line bg-surface-muted">
+            <div className="mx-auto flex max-w-5xl items-center justify-between gap-2 px-3 py-1.5 sm:px-6">
+              <Link
+                href="/"
+                aria-label="Quay lại danh sách mảng ảnh"
+                className="inline-flex min-h-11 min-w-11 shrink-0 cursor-pointer items-center justify-center gap-1 rounded-lg px-2 text-sm font-semibold text-accent transition-colors duration-200 hover:bg-accent-soft sm:gap-1.5"
+              >
+                <ChevronLeft aria-hidden="true" className="size-4" />
+                <span className="hidden min-[360px]:inline">Danh sách</span>
+              </Link>
 
-            <button
-              onClick={() => setIsQRModalOpen(true)}
-              className="flex items-center gap-1 px-3 py-1.5 bg-[#141c30] hover:bg-[#1f2b48] border border-amber-400/50 rounded-lg text-xs font-bold text-[#f3d078] transition shadow-md active:scale-95"
-              title="Mã QR bài thuyết minh"
-            >
-              <QrCode className="w-4 h-4 text-amber-300" />
-              <span>MÃ QR</span>
-            </button>
+              <div className="flex flex-wrap items-center justify-end gap-1.5 sm:gap-2">
+                {onFontSizeChange && (
+                  <FontSizeControl currentSize={fontSize} onSizeChange={onFontSizeChange} />
+                )}
 
-            <button
-              onClick={handleShare}
-              className="p-2 bg-[#141c30] hover:bg-[#1f2b48] border border-amber-400/30 rounded-lg text-gray-200 hover:text-white transition shadow-md active:scale-95"
-              title={copiedShare ? "Đã sao chép liên kết!" : "Chia sẻ bài thuyết minh"}
-            >
-              {copiedShare ? (
-                <Check className="w-4 h-4 text-green-400" />
-              ) : (
-                <Share2 className="w-4 h-4 text-amber-200" />
-              )}
-            </button>
+                <button
+                  type="button"
+                  onClick={openQR}
+                  className="inline-flex min-h-11 shrink-0 cursor-pointer items-center gap-1.5 rounded-lg border border-control bg-surface px-3 text-sm font-semibold text-accent transition-colors duration-200 hover:border-accent hover:bg-accent-soft"
+                  aria-label="Mã QR bài thuyết minh"
+                  aria-haspopup="dialog"
+                >
+                  <QrCode aria-hidden="true" className="size-4" />
+                  Mã QR
+                </button>
+
+                <button
+                  type="button"
+                  onClick={copyLink}
+                  className="grid size-11 shrink-0 cursor-pointer place-items-center rounded-lg border border-control bg-surface text-accent transition-colors duration-200 hover:border-accent hover:bg-accent-soft"
+                  aria-label={copied ? "Đã sao chép liên kết" : "Sao chép liên kết"}
+                  title={copied ? "Đã sao chép liên kết" : "Sao chép liên kết"}
+                >
+                  {copied ? (
+                    <Check aria-hidden="true" className="size-4" />
+                  ) : (
+                    <Share2 aria-hidden="true" className="size-4" />
+                  )}
+                </button>
+                <span className="sr-only" role="status">{copied && "Đã sao chép liên kết"}</span>
+              </div>
+            </div>
           </div>
         )}
-      </div>
+      </header>
 
-      <QRModal
-        isOpen={isQRModalOpen}
-        onClose={() => setIsQRModalOpen(false)}
-        title={panelTitle || "THUYẾT MINH MẢNG ẢNH"}
-      />
-    </header>
+      {qrUrl && (
+        <QRModal
+          url={qrUrl}
+          title={panelTitle}
+          onClose={() => setQrUrl("")}
+          copyStatus={copyStatus}
+          onCopy={copyLink}
+        />
+      )}
+    </>
   );
 }

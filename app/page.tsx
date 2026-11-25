@@ -12,10 +12,10 @@ export default function HomePage() {
   const { query, setQuery, filteredPanels } = useSearch(PANELS_DATA);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#07090e]">
+    <div className="flex min-h-screen flex-col">
       <Header variant="list" />
 
-      <main className="flex-1 w-full">
+      <main id="noi-dung" tabIndex={-1} className="w-full flex-1 outline-none">
         <PanelGrid
           panels={filteredPanels}
           totalCount={PANELS_DATA.length}

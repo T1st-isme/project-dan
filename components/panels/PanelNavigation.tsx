@@ -1,7 +1,6 @@
-import React from "react";
 import Link from "next/link";
-import { Panel } from "@/types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { Panel } from "@/types";
 
 interface PanelNavigationProps {
   prev?: Panel;
@@ -9,37 +8,39 @@ interface PanelNavigationProps {
 }
 
 export function PanelNavigation({ prev, next }: PanelNavigationProps) {
+  if (!prev && !next) return null;
+
   return (
-    <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-4 my-4 sm:my-6">
-      {/* Prev Button */}
-      {prev ? (
+    <nav aria-label="Điều hướng mảng ảnh" className="grid gap-2.5 sm:grid-cols-2 sm:gap-4">
+      {prev && (
         <Link
           href={`/panel/${prev.slug}`}
-          className="flex items-center gap-2 px-4 py-2.5 bg-[#141b30] hover:bg-[#1f2a4a] border border-[#2d3a66] hover:border-[#c5a059] rounded-full text-xs font-semibold text-gray-200 hover:text-white transition-all duration-200 shadow-md min-w-0 sm:max-w-[48%] group"
+          className="flex min-h-11 min-w-0 items-center gap-2.5 rounded-xl border border-line bg-surface px-3 py-2.5 text-accent transition-colors duration-200 hover:border-accent hover:bg-accent-soft sm:col-start-1 sm:px-4"
         >
-          <ChevronLeft className="w-4 h-4 flex-shrink-0 text-[#e5c158] group-hover:-translate-x-0.5 transition-transform" />
-          <span className="truncate min-w-0">
-            <strong className="text-[#e5c158] font-bold uppercase tracking-wider mr-1">MẢNG ẢNH TRƯỚC:</strong>
-            <span className="text-gray-300 font-normal">{prev.shortTitle}</span>
+          <ChevronLeft aria-hidden="true" className="size-5 shrink-0" />
+          <span className="min-w-0">
+            <span className="block text-xs font-semibold">Mảng ảnh trước</span>
+            <span className="mt-0.5 block truncate text-xs text-muted sm:text-sm" title={prev.shortTitle}>
+              {prev.shortTitle}
+            </span>
           </span>
         </Link>
-      ) : (
-        <div className="hidden sm:block" />
       )}
 
-      {/* Next Button */}
       {next && (
         <Link
           href={`/panel/${next.slug}`}
-          className="flex items-center gap-2 px-4 py-2.5 bg-[#800000] hover:bg-[#9e0000] border border-[#b81d1d] hover:border-amber-400 rounded-full text-xs font-semibold text-white transition-all duration-200 shadow-md min-w-0 sm:max-w-[48%] sm:ml-auto justify-end group"
+          className="flex min-h-11 min-w-0 items-center justify-end gap-2.5 rounded-xl border border-accent-line bg-accent-soft px-3 py-2.5 text-right text-accent transition-colors duration-200 hover:border-accent hover:bg-surface sm:col-start-2 sm:px-4"
         >
-          <span className="truncate min-w-0 text-right">
-            <strong className="text-[#ffe599] font-bold uppercase tracking-wider mr-1">MẢNG ẢNH KẾ TIẾP:</strong>
-            <span className="text-white font-normal">{next.shortTitle}</span>
+          <span className="min-w-0">
+            <span className="block text-xs font-semibold">Mảng ảnh tiếp theo</span>
+            <span className="mt-0.5 block truncate text-xs text-muted sm:text-sm" title={next.shortTitle}>
+              {next.shortTitle}
+            </span>
           </span>
-          <ChevronRight className="w-4 h-4 flex-shrink-0 text-amber-300 group-hover:translate-x-0.5 transition-transform" />
+          <ChevronRight aria-hidden="true" className="size-5 shrink-0" />
         </Link>
       )}
-    </div>
+    </nav>
   );
 }

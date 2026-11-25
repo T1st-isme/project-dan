@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useRef } from "react";
 import { Search, X } from "lucide-react";
 
 interface SearchBarProps {
@@ -12,27 +12,38 @@ interface SearchBarProps {
 export function SearchBar({
   value,
   onChange,
-  placeholder = "Tìm theo tên mảng ảnh, chủ đề..."
+  placeholder = "Tìm theo tên mảng ảnh, chủ đề",
 }: SearchBarProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const clearSearch = () => {
+    onChange("");
+    inputRef.current?.focus();
+  };
+
   return (
-    <div className="relative w-full">
-      <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-amber-400/70 pointer-events-none">
-        <Search className="w-4 h-4" />
-      </div>
+    <div className="relative w-full" role="search">
+      <Search
+        aria-hidden="true"
+        className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-accent"
+      />
       <input
-        type="text"
+        ref={inputRef}
+        type="search"
+        aria-label="Tìm mảng ảnh"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="w-full bg-[#121629] text-white text-xs sm:text-sm placeholder-gray-400 pl-10 pr-9 py-2 rounded-xl border border-[#2d3a66] focus:border-[#d4af37] focus:outline-none focus:ring-1 focus:ring-[#d4af37] transition-all shadow-md"
+        className="min-h-12 w-full rounded-xl border border-control bg-surface py-2.5 pr-14 pl-10 text-base text-ink shadow-xs placeholder:text-muted focus:border-accent [&::-webkit-search-cancel-button]:hidden"
       />
       {value && (
         <button
-          onClick={() => onChange("")}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white p-1 rounded-full transition"
+          type="button"
+          onClick={clearSearch}
+          className="absolute top-1/2 right-1 grid size-11 -translate-y-1/2 cursor-pointer place-items-center rounded-lg text-muted transition-colors duration-200 hover:bg-accent-soft hover:text-accent"
           aria-label="Xóa từ khóa tìm kiếm"
         >
-          <X className="w-4 h-4" />
+          <X aria-hidden="true" className="size-4" />
         </button>
       )}
     </div>

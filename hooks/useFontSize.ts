@@ -1,39 +1,47 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useSyncExternalStore } from "react";
 
 export type FontSizeLevel = "sm" | "md" | "lg";
 
-export function useFontSize() {
-  const [fontSize, setFontSize] = useState<FontSizeLevel>("md");
+const STORAGE_KEY = "app_font_size";
+const FONT_SIZE_EVENT = "app-font-size-change";
+const fontSizeClasses: Record<FontSizeLevel, string> = {
+  sm: "text-sm leading-relaxed",
+  md: "text-base leading-relaxed",
+  lg: "text-xl leading-loose",
+};
 
-  useEffect(() => {
-    const saved = localStorage.getItem("app_font_size") as FontSizeLevel;
-    if (saved && ["sm", "md", "lg"].includes(saved)) {
-      setFontSize(saved);
-    }
-  }, []);
+function subscribe(onChange: () => void) {
+  window.addEventListener("storage", onChange);
+  window.addEventListener(FONT_SIZE_EVENT, onChange);
+
+  return () => {
+    window.removeEventListener("storage", onChange);
+    window.removeEventListener(FONT_SIZE_EVENT, onChange);
+  };
+}
+
+function getStoredFontSize(): FontSizeLevel {
+  const saved = window.localStorage.getItem(STORAGE_KEY);
+  return saved === "sm" || saved === "lg" ? saved : "md";
+}
+
+function getDefaultFontSize(): FontSizeLevel {
+  return "md";
+}
+
+export function useFontSize() {
+  const fontSize = useSyncExternalStore(subscribe, getStoredFontSize, getDefaultFontSize);
 
   const changeFontSize = (level: FontSizeLevel) => {
-    setFontSize(level);
-    localStorage.setItem("app_font_size", level);
-  };
-
-  const getFontSizeClass = () => {
-    switch (fontSize) {
-      case "sm":
-        return "text-sm leading-relaxed";
-      case "lg":
-        return "text-xl leading-loose";
-      case "md":
-      default:
-        return "text-base leading-relaxed";
-    }
+    window.localStorage.setItem(STORAGE_KEY, level);
+    window.dispatchEvent(new Event(FONT_SIZE_EVENT));
   };
 
   return {
     fontSize,
     changeFontSize,
-    getFontSizeClass
+    getFontSizeClass: () => fontSizeClasses[fontSize],
   };
 }
